@@ -4,14 +4,15 @@ public class GameStrategy {
 
 	private int getColumn(int cellId) {
 		// WRITE YOUR LOGIC HERE...................................		
-
-		return 0;	// just for the heck of it
+		int columnNumber = cellId%8;
+		return columnNumber;	// just for the heck of it
 	}
 	
 	private int getRow(int cellId) {
 		// WRITE YOUR LOGIC HERE....................................
+		int rowNumber= cellId/8;
 		
-		return 0;	// just for the heck of it
+		return rowNumber;	// just for the heck of it
 	}
 
 	public boolean isValidPosition(int cellId) {
@@ -25,10 +26,17 @@ public class GameStrategy {
 		
 		int row = getRow(cellId);
 		
-		/*
-			WRITE YOUR LOGIC HERE...............................
-
-		*/
+		//check for existing values
+		for(int i=0;i<8;i++) {
+			if(placedQueens[i][col]==true || placedQueens[row][i]==true) {
+				isValid = false;
+			}
+		}
+		//update placedQueens & increment numqueens
+		if(isValid==true) {
+			placedQueens[row][col]=true;
+			numQueens++;
+		}
 		return isValid;
 	}
 }
