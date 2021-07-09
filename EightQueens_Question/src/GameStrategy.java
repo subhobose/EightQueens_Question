@@ -26,10 +26,61 @@ public class GameStrategy {
 		
 		int row = getRow(cellId);
 		
-		//check for existing values
+		//check for existing values in same rows/columns
 		for(int i=0;i<8;i++) {
 			if(placedQueens[i][col]==true || placedQueens[row][i]==true) {
 				isValid = false;
+				break;
+			}
+		}
+		//check for existing values in diagonals
+		if(row==0) {
+			if(col==7) {
+				if(placedQueens[row+1][col-1]==true) {
+					isValid=false;
+				}
+			}
+			else if(col==0) {
+				if(placedQueens[row+1][col+1]==true) {
+					isValid=false;
+				}
+			}
+			else {
+				if(placedQueens[row+1][col+1]==true || placedQueens[row+1][col-1]==true) {
+					isValid = false;
+				}
+			}
+		}
+		else if(row==7) {
+			if(col==0) {
+				if(placedQueens[row-1][col+1]==true) {
+					isValid=false;
+				}
+			}
+			else if(col==7) {
+				if(placedQueens[row-1][col-1]==true) {
+					isValid=false;
+				}
+			}
+			else {
+				if(placedQueens[row-1][col-1]==true || placedQueens[row-1][col+1]==true) {
+					isValid=false;
+				}
+			}
+		}
+		else if(col==0) {
+			if(placedQueens[row-1][col+1]==true || placedQueens[row+1][col+1]==true) {
+				isValid=false;
+			}
+		}
+		else if(col==7) {
+			if(placedQueens[row-1][col-1]==true || placedQueens[row+1][col-1]==true) {
+				isValid=false;
+			}
+		}
+		else {
+			if(placedQueens[row+1][col+1]==true || placedQueens[row+1][col-1]==true || placedQueens[row-1][col-1]==true || placedQueens[row-1][col+1]==true) {
+				isValid=false;
 			}
 		}
 		//update placedQueens & increment numqueens
